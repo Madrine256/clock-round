@@ -1,0 +1,92 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+// reusable functions
+@mixin flexbox(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+@mixin lengths($width, $height){
+    width: $width;
+    height: $height;
+}
+
+// varaibles
+$bgcolor : #091921;
+$hrpointerClr: #500922;
+$minpointerClr : #c4c4c4;
+$secpointerClr :#1e536e;
+
+
+body{
+    @include flexbox;
+    min-height: 100vh;
+    background-color: $bgcolor;
+    
+}
+.clock{
+    @include lengths(350px, 350px);
+    @include flexbox;
+    background: $bgcolor url('/img/clock.png');
+    background-size: cover;
+    border: 4px solid $bgcolor;
+    border-radius: 50%;
+    box-shadow: 0 -15px 15px rgba(255,255,255,0.05),
+                0 20px 20px rgba(0,0,0,0.3),
+                inset 0 -15px 15px rgba(255,255,255,0.05),
+                inset 0 20px 20px rgba(0,0,0,0.3);
+
+    &::before{
+        content: "";
+        position: absolute;
+        @include lengths(15px, 15px);
+        background-color: #fff;
+        z-index: 3000000;
+        border-radius: 50%;
+    }
+
+    .hour, .minutes, .seconds{
+        position: absolute;
+    }
+    .hour, .hr{
+        @include lengths(160px,160px );
+    }
+    .minutes, .min{
+        @include lengths(190px, 190px);
+    }
+    .seconds, .sec{
+        @include lengths(210px, 230px);
+    }
+    .hr, .min, .sec{
+       display: flex;
+       justify-content: center;
+        position: absolute;
+        border-radius: 50%;
+    }
+    .hr::before,.min::before, .sec::before{
+        content: "";
+        position: absolute;
+        border-radius: 6px 6px 0 0;
+    }
+    .hr::before{
+        @include lengths(9px, 80px);
+        background-color: $hrpointerClr;
+        z-index: 10;
+       
+    }
+    .min::before{
+        @include lengths(9px,95px );
+        background-color: $minpointerClr;
+        z-index: 12;
+    }
+    .sec::before{
+        @include lengths(2px, 154px);
+        z-index: 12;   
+        background-color: $secpointerClr;    
+    }
+
+}
